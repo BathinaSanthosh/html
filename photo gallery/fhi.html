@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Photo Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #333;
+            overflow: auto;
+        }
+
+        .navbar a {
+            float: left;
+            padding: 14px 20px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .gallery {
+            display: none;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .gallery-item {
+            width: calc(33.333% - 10px);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-item {
+                width: calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-item {
+                width: 100%;
+            }
+        }
+
+        .filter {
+            width: 100%;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 80%;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#albums" onclick="showGallery('albums')">Albums</a>
+        <a href="#screenshots" onclick="showGallery('screenshots')">Screenshots</a>
+        <a href="#recently-deleted" onclick="showGallery('recently-deleted')">Recently Deleted</a>
+    </div>
+
+    <div class="filter">
+        <button onclick="filterGallery('all')">All</button>
+        <button onclick="filterGallery('favorites')">Favorites</button>
+        <button onclick="filterGallery('recent')">Recent</button>
+    </div>
+
+    <div id="albums" class="gallery">
+        <img src="santhosh.jpg" alt="Album 1" class="gallery-item" height="200px" width="200px">
+        <img src="santhosh1.jpg" alt="Album 2" class="gallery-item" height="200px" width="200px">
+        <img src="santhosh2.jpg" alt="Album 3" class="gallery-item" height="200px" width="200px">
+        <img src="santhosh3.jpg" alt="Album 4" class="gallery-item" height="200px" width="200px">
+        <img src="santhosh4.jpg" alt="Album 5" class="gallery-item" height="200px" width="200px">
+        <img src="santhosh4.jpg" alt="Album 6" class="gallery-item" height="200px" width="200px">
+    </div>
+
+    <div id="screenshots" class="gallery">
+        <img src="screenshot1.jpg" alt="Screenshot 1" class="gallery-item">
+        <img src="screenshot2.jpg" alt="Screenshot 2" class="gallery-item">
+        <img src="screenshot3.jpg" alt="Screenshot 3" class="gallery-item">
+        <img src="screenshot4.jpg" alt="Screenshot 4" class="gallery-item">
+        <img src="screenshot5.jpg" alt="Screenshot 5" class="gallery-item">
+        <img src="screenshot6.jpg" alt="Screenshot 6" class="gallery-item">
+    </div>
+
+    <div id="recently-deleted" class="gallery">
+        <img src="deleted1.jpg" alt="Deleted 1" class="gallery-item">
+        <img src="deleted2.jpg" alt="Deleted 2" class="gallery-item">
+        <img src="deleted3.jpg" alt="Deleted 3" class="gallery-item">
+        <img src="deleted4.jpg" alt="Deleted 4" class="gallery-item">
+        <img src="deleted5.jpg" alt="Deleted 5" class="gallery-item">
+        <img src="deleted6.jpg" alt="Deleted 6" class="gallery-item">
+    </div>
+
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-image">
+    </div>
+
+    <script>
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const modal = document.getElementById('modal');
+        const modalImage = document.getElementById('modal-image');
+        const closeModal = document.querySelector('.close');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                modal.style.display = 'flex';
+                modalImage.src = item.src;
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        function showGallery(id) {
+            document.querySelectorAll('.gallery').forEach(gallery => {
+                gallery.style.display = 'none';
+            });
+            document.getElementById(id).style.display = 'flex';
+        }
+
+        function filterGallery(filter) {
+            galleryItems.forEach(item => {
+                if (filter === 'all') {
+                    item.style.display = 'block';
+                } else if (filter === 'favorites' && !item.classList.contains('favorite')) {
+                    item.style.display = 'none';
+                } else if (filter === 'recent' && !item.classList.contains('recent')) {
+                    item.style.display = 'none';
+                } else {
+                    item.style.display = 'block';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

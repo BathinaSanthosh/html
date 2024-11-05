@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gallery-item {
+    margin: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;}
+        
+
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="santhosh.jpg" alt="Description of Image 1" height="100" width="100">
+        </div>
+        <div class="gallery-item">
+            <img src="santhosh1.jpg" alt="Description of Image 2" height="100" width="100">
+        </div>
+        <div class="gallery-item">
+            <img src="santhosh2.jpg" alt="Description of Image 3" height="100" width="100">
+        </div>
+        <div class="gallery-item">
+            <img src="santhosh3.jpg" alt="Description of Image 4" height="100" width="100">
+        </div>
+        <div class="gallery-item">
+            <img src="santhosh4.jpg" alt="Description of Image 5" height="100" width="100">
+        </div>
+        <div class="gallery-item">
+            <img src="santhosh5.jpg" alt="Description of Image 6" height="100" width="100">
+        </div>
+    </div>
+</body>
+</html>
